@@ -4,8 +4,8 @@ create database if not exists project3;
 use project3;
 CREATE TABLE `soortbrood` (
   idSoortBrood INT NOT NULL AUTO_INCREMENT,
-  naamBrood VARCHAR(20) NOT NULL,
-   img LONGBLOB NULL,
+  naamBrood VARCHAR(40) NOT NULL,
+   img VARCHAR(45) NULL,
   PRIMARY KEY (idsoortBrood));
 
 
@@ -25,6 +25,7 @@ CREATE TABLE `locatieBrood` (
   idSoortBrood int NOT NULL,
   locatieCode int NOT NULL, 
   hoeveelheid int NOT NULL,
+  prijs DECIMAL(3,2) NOT NULL,
   PRIMARY KEY (idLocatieBrood));
   
   CREATE TABLE `bestelling` (

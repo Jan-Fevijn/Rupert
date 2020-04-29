@@ -1,0 +1,6 @@
+<gebruikers>
+  <klant>
+    <codeKlant>123</codeKlant>
+    <saldo>12</saldo>
+  </klant>
+</gebruikers>
