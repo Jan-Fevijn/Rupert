@@ -556,3 +556,7 @@ ul#nav li a:hover,ul#nav li a:focus {
   color: #FFF;
   text-decoration: underline;
 }
+
+.zwart {
+  color: blue;
+}

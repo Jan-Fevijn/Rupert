@@ -64,7 +64,7 @@
 							$mail->IsHTML(true);
 							$mail->AddAddress("sendmail@atheneumjanfevijn.be", "sendmail");
 							$mail->SetFrom("no-replay@atheneumjanfevijn.be", "info");
-							$mail->Subject = "Rup";
+							$mail->Subject = "Test";
 							$content = "<b>" . $bericht . "</b>";
 							
 							$mail->MsgHTML($content); 

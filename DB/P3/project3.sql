@@ -65,3 +65,14 @@ INSERT INTO `project3`.`soortbrood` (`naamBrood`) VALUES ('Bruin brood');
 INSERT INTO `project3`.`locatiebrood` (`idSoortBrood`, `locatieCode`, `hoeveelheid`) VALUES ('2', '1', '7');
 
 INSERT INTO `project3`.`bestelling` (`codeKlant`, `idSoortBrood`, `idLocatieBrood`, `datumBestelling`) VALUES ('123', '1', '1', '20200422');
+
+USE `project3`;
+CREATE  OR REPLACE VIEW `brood2` AS
+select soortbrood.idSoortBrood as 'ID brood', naamBrood as 'Naam brood', img as Afbeelding, hoeveelheid as Aantal, prijs as Prijs from project3.soortBrood join project3.locatiebrood;
+
+CREATE TABLE `project3`.`muntjes` (
+  `idMuntjes` INT NOT NULL AUTO_INCREMENT,
+  `waardeMunt` decimal (8,2) NULL,
+  `transactie`decimal (8,2) NULL,
+  PRIMARY KEY (`idMuntjes`),
+  UNIQUE INDEX `idMuntjes_UNIQUE` (`idMuntjes` ASC));
