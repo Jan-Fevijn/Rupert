@@ -1,45 +1,30 @@
-<?php
-if (isset($_POST['mb'])) {
-	 
-	if(isset($_SESSION['mNummer'])) {
-	  if ($_SESSION['mNummer'] == 0) {
-		  $_SESSION['mNummer'] = $_POST['mb'];
-	  } else {
-		  $_SESSION['mNummer'] = $_SESSION['mNummer'] . $_POST['mb'];
-	  }
-	} else {
-	     $_SESSION['mNummer'] = $_POST['mb'];
-	 	}     
-  } else {
-		if (isset($_SESSION['mNummer'])) {
-	 	} else {
-	  	$_SESSION['mNummer'] = 0;
-	 	}
-  }
-  if (isset($_POST['c'])) {
-		$_SESSION['mNummer'] = 0;
-  }
-?>
+<form id='machineknoppen' action='uitvoering.php' method="POST">
 
-<form id = 'machineknoppen' method='POST' action='uitvoering.php' >
 	<div id='mNummer'>
-		<?php
-			if (isset($_SESSION['mNummer'])) {
-				echo($_SESSION['mNummer']);
-			}
-		?>
+
 	</div>
-	<input type='hidden' name='submited'>
-	<input class='mb' type='submit' value='1' name='mb'>
-	<input class='mb' type='submit' value='2' name='mb'>
-	<input class='mb' type='submit' value='3' name='mb'>
-	<input class='mb' type='submit' value='4' name='mb'>
-	<input class='mb' type='submit' value='5' name='mb'>
-	<input class='mb' type='submit' value='6' name='mb'>
-	<input class='mb' type='submit' value='7' name='mb'>
-	<input class='mb' type='submit' value='8' name='mb'>
-	<input class='mb' type='submit' value='9' name='mb'>
-	<input class='mb' type='submit' value='c' name='c'>
-	<input class='mb' type='submit' value='0' name='mb'>
+	<input id='bestelNr' type='hidden' name='nummerBestelling'>
+	<input class='mb' type='button' value='1' name='mb' onclick="valueAdd(1)">
+	<input class='mb' type='button' value='2' name='mb' onclick="valueAdd(2)">
+	<input class='mb' type='button' value='3' name='mb' onclick="valueAdd(3)">
+	<input class='mb' type='button' value='4' name='mb' onclick="valueAdd(4)">
+	<input class='mb' type='button' value='5' name='mb' onclick="valueAdd(5)">
+	<input class='mb' type='button' value='6' name='mb' onclick="valueAdd(6)">
+	<input class='mb' type='button' value='7' name='mb' onclick="valueAdd(7)">
+	<input class='mb' type='button' value='8' name='mb' onclick="valueAdd(8)">
+	<input class='mb' type='button' value='9' name='mb' onclick="valueAdd(9)">
+	<input class='mb' type='button' value='c' name='c' onclick="valueAdd('c')">
+	<input class='mb' type='button' value='0' name='mb' onclick="valueAdd(0)">
 	<input class='order'  type='submit' value='bestellen' name='order'>
 </form>
+<script>
+function valueAdd(waarde) {
+	if (waarde === 'c') {
+		document.getElementById("mNummer").innerHTML = '';
+  	document.getElementById("bestelNr").value = '';
+	} else {
+  	document.getElementById("mNummer").innerHTML += waarde;
+  	document.getElementById("bestelNr").value += waarde;
+	}
+}
+</script>
