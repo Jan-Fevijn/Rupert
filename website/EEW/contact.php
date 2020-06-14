@@ -1,9 +1,18 @@
 <?php
+  include "conn.php"
+?>
+<?php
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\Exception; 
 	require("PHPMailer-master/src/Exception.php");
 	require("PHPMailer-master/src/PHPMailer.php");
 	require("PHPMailer-master/src/SMTP.php");
+?>
+<?php
+	session_start();
+  if ($_SESSION["login"] == "") {
+    header("location:index.php");
+  }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -32,7 +41,6 @@
 				<h1>Contacteer de ICT-beheerder hier</h1>
 				<p></p>
 				<?php
-					session_start();
 					$_SESSION["bericht"] = "";
 					$yourmessage = "";
 					$jouwNaam = "";
@@ -41,10 +49,11 @@
 					$contact_submitted = 'Je bericht werd verstuurd.';
 					if (isset($_POST['contact_submitted'])) {
 						$return = "\r";
-						$jouwNaam = stripslashes(strip_tags($_POST['your_name']));
+						$jouwNaam = stripslashes(strip_tags($_SESSION["login"]));
 						$_SESSION["bericht"] = stripslashes(strip_tags($_POST['your_message']));
-						$contact_naam = "Name: ".$jouwNaam;
-						$bericht_text = "Message: " . $_SESSION["bericht"];
+						$contact_naam = "Naam leerkracht: ".$jouwNaam;
+						$bericht_text = "Bericht: " . $_SESSION["bericht"];
+						$bericht_sql = $_SESSION["bericht"];
 						$user_answer = trim(htmlspecialchars($_POST['user_answer']));
 						$answer = trim(htmlspecialchars($_POST['answer']));
 						$bericht = $contact_naam . $return . $bericht_text;
@@ -64,7 +73,7 @@
 							$mail->IsHTML(true);
 							$mail->AddAddress("sendmail@atheneumjanfevijn.be", "sendmail");
 							$mail->SetFrom("no-replay@atheneumjanfevijn.be", "info");
-							$mail->Subject = "Test";
+							$mail->Subject = $_POST["ticketS"];
 							$content = "<b>" . $bericht . "</b>";
 							
 							$mail->MsgHTML($content); 
@@ -73,6 +82,27 @@
 								var_dump($mail);
 							} else {
 								echo '<p style="color: green;"><strong>'.$contact_submitted.'</strong></p>';
+#toevoegen ticket
+								$mysql = "SELECT idsoortTicket FROM soortticket WHERE soortTicketNaam ='". $_POST["ticketS"] ."'";
+
+								$resultaat = $conn->query($mysql);
+
+								if ($resultaat->num_rows > 0) {
+									while($row = $resultaat->fetch_assoc()){
+										$idTicket = $row["idsoortTicket"];
+									}		
+								}
+								include "conn.php";
+								$sqli = "INSERT INTO ticket (ticketSoort,leerkracht,beschrijvingTicket) VALUES (" . $idTicket . "," . $_SESSION["leerkrachtID"] . ",'" . $bericht_sql . "')";
+
+								if ($conn->query($sqli) === true) {
+									echo "Gelukt";
+								}else{
+									echo "Error";
+									echo $sqli;
+								}
+#eind toevoegen ticket
+
 							}
 						}
 						else echo '<p style="color: red;">Vul aub je naam, een geldig email addres, je bericht en het antwoord op het simpele rekenvraagje in voor het verzenden van je bericht.</p>';
@@ -83,14 +113,14 @@
 				?>
 				<form id="contact" action="contact.php" method="post">
 					<div class="form_settings">
-						<p><span>//Naam:</span><input class="contact" type="text" name="your_name" value="<?php echo $jouwNaam; ?>" /></p>
-						<span>Soort ticket:</span><select name="ticketS">
+						<span>Soort ticket:</span>
+						<select name="ticketS">
 						<?php
 							$sql = "SELECT soortTicketNaam FROM soortticket";
 							$resultaat = $conn->query($sql);
 								if ($resultaat->num_rows > 0) {
 									while($row = $resultaat->fetch_assoc()) { 
-									echo "<option value ='" . $row["idsoortTicket"] . "'>" . $row["soortTicketNaam"] . "</option>" . "<br>";
+									echo "<option value ='" . $row["soortTicketNaam"] . "'>" . $row["soortTicketNaam"] . "</option>" . "<br>";
 									}
 								} else {
 						 			echo "<option>niets gevonden</option>";
@@ -99,9 +129,10 @@
 							$conn->close();
 						?>
 						</select>
-						<br/>
+						<br/><br/>
+						<p>Geef wat extra info over het probleem door het veld onder "Bericht:" in te vullen. Geef zeker door in welk lokaal, waar precies in het lokaal en wat er precies scheelt.</p>
 						<p><span>Bericht: </span><br/><textarea class="contact textarea" rows="5" cols="50" name="your_message"><?php echo $yourmessage; ?></textarea></p>
-						<p style="line-height: 1.7em;">Om spam te verkomen, antwoord op deze vraag:</p>
+						<p style="line-height: 1.7em;">Antwoord op deze controlevraag:</p>
 						<p><span><?php echo $number_1; ?> + <?php echo $number_2; ?> = ?</span><input type="text" name="user_answer" /><input type="hidden" name="answer" value="<?php echo $answer; ?>" /></p>
 						<p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="Verzenden" /></p>
 					</div>

@@ -29,10 +29,20 @@
         ?>
 			</div>
 			<div class="content">
-				<form>
-					<p><span>Naam: </span><input class="contact" type="text" name="jouw_naam"> <!-- value="<?php echo $jouwNaam; ?>" />--></p>
-					<p><span>Wachtwoord: </span><input class="contact" type="text" name="jouw_wachtwoord"></p>
-					<p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="Verzenden" /></p>
+				<form action="verwerking.php" method="POST">
+					<input type="hidden" name="form1">
+					<p>
+						<span>Naam:<?php echo "&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp"?></span>
+						<input class="contact" type="text" name="jouw_naam">
+					</p>
+					<p>
+						<span>Wachtwoord: </span>
+						<input class="contact" type="password" name="jouw_wachtwoord">
+					</p>
+					<p>
+						<span></span>
+						<input class="submit" type="submit" name="contact_submitted" value="Verzenden" />
+					</p>
 				</form>
 			</div>
 		</div>

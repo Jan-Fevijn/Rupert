@@ -1,4 +1,16 @@
 <!DOCTYPE HTML>
+<?php
+session_start();
+echo "<script>console.log('Debug Objects: " . $_SESSION["login"] . "' )</script>";
+  if ($_SESSION["login"] == "") {
+    header("location:index.php");
+  }
+
+
+#$test = MD5("a");
+#echo $test;
+?>
+
 <html>
 <head>
   <title>Jan Fevijn Helpdesk</title>

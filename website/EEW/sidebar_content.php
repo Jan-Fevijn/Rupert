@@ -1,7 +1,7 @@
 <?php
 	echo '<div class="sidebar">
           <h3>Laatse nieuws</h3>
-          <h4>Nieuwe Website Gelaunched</h4>
+          <h4>Website Gelaunched</h4>
           <h5>Vrijdag 13 september, 2019</h5>
           <h4>Algemene lay-out veranderd</h4>
           <h5>Donderdag 7 november, 2019</h5>

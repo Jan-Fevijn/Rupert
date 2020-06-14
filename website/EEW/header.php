@@ -18,7 +18,7 @@
         
 			echo '<div id="logo">
 				<div id="logo_text">
-					<h1><a href="_index.html">Helpdesk website voor: <span class="logo_colour" href="https://www.janfevijn.be/">Atheneum Jan Fevijn</span></a></h1>
+					<h1><a href="_index.php">Helpdesk website voor: <span class="logo_colour" href="https://www.janfevijn.be/">Atheneum Jan Fevijn</span></a></h1>
 					<h2>Gemaakt door: Rupert Van Den Eynde</h2>
 				</div>
 			</div>
@@ -26,9 +26,9 @@
 				<div id="menu_container">
           <ul class="sf-menu" id="nav">
             <li><a href="_index.php">Home</a></li>
-            <!--<li><a href="page.php">Over mij</a></li>-->
+            <li><a href="oM.php">Over mij</a></li>
             <li><a href="hWH.php">Hoe het werkt</a></li>
-            <li><a>Hulp</a>
+            <!--<li><a>Hulp</a>
               <ul>
                 <li><a href="hWH.php">Hoe werkt het?</a></li>
                 <li><a>Inhoud</a>
@@ -36,14 +36,15 @@
                     <li><a href="_index.php">Homepage</a></li>
                     <li><a href="contact.php">Contact formulier</a></li>
                     <li><a href="hWH.php">Hoe het werkt</a></li>
-                    <li><a href="tickets.php">Bekijk je tickets</a></li>
+                    <li><a href="tickets.php">Bekijk hier je lopende tickets</a></li>
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li>-->
             <li><a href="contact.php">Contact formulier</a></li>
-            <li><a href="tickets.php">Bekijk hier je tickets</a></li>
+            <li><a href="tickets.php">Bekijk hier je lopende tickets</a></li>
           </ul>
         </div>
 			</nav>'
+
 ?>
